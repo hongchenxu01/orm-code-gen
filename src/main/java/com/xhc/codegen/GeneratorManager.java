@@ -2,11 +2,9 @@ package com.xhc.codegen;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.reflect.FieldUtils;
 
 import com.xhc.codegen.config.Config;
 import com.xhc.codegen.config.TemplateConfig;
@@ -60,22 +58,12 @@ public class GeneratorManager {
     }
 
     private void ProcessTemplate(TableInfo dataModel, TemplateConfig template) throws Exception {
-
-        ModelHolder modelHolder = new ModelHolder(dataModel, template.getOptions());
+    	ModelHolder modelHolder = new ModelHolder(dataModel, template.getOptions());
         String tempFilename = template.getTemplateFilename();
         String outputPath = template.getOutputPath();
         String outputFilenameRule = template.getOutputFilenameRule();
-
-        String filename;
-
-        String filenameValue;
-        if (dataModel instanceof HashMap) {
-            filenameValue = (String) ((HashMap) dataModel).get(propName);
-        } else {
-            filenameValue = (String) FieldUtils.readField(dataModel, propName, true);
-        }
-
-        filename = outputFilenameRule.replace("{" + propName + "}", filenameValue);
+        
+        String filename = dataModel.getModelName() + outputFilenameRule;
 
         outputPath = outputPath.endsWith("/") ? outputPath : outputPath + "/";
 
