@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="${options.mapperns}.${model.upperCaseName}Mapper">
-    <resultMap id="BaseResultMap" type="${options.pons}.${model.upperCaseName}">
+<mapper namespace="${options.mapperns}.${model.modelName}Mapper">
+    <resultMap id="BaseResultMap" type="${options.pons}.${model.modelName}">
         <id column="${model.primaryKey.name}" property="${model.primaryKey.name}" jdbcType="${model.primaryKey.typeName}"/>
     <#list model.fields as field>
         <result column="${field.name}" property="${field.name}" jdbcType="${field.typeName}"/>
@@ -25,11 +25,11 @@
         delete from ${model.name}
         where id = ${r"#{"}${model.primaryKey.name},jdbcType=${model.primaryKey.typeName}${r"}"}
     </delete>
-    <insert id="insert" useGeneratedKeys="true" keyProperty="${model.primaryKey.name}" parameterType="${options.pons}.${model.upperCaseName}">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="${model.primaryKey.name}" parameterType="${options.pons}.${model.modelName}">
         insert into ${model.name} (<#list model.fields as field>${field.name}<#sep>, </#list>)
         values (<#list model.fields as field>${r"#{"}${field.name},jdbcType=${field.typeName}${r"}"}<#sep>, </#list>)
     </insert>
-    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="${model.primaryKey.name}" parameterType="${options.pons}.${model.upperCaseName}">
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="${model.primaryKey.name}" parameterType="${options.pons}.${model.modelName}">
         insert into ${model.name}
         <trim prefix="(" suffix=")" suffixOverrides=",">
         <#list model.fields as field>
@@ -46,7 +46,7 @@
         </#list>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="${options.pons}.${model.upperCaseName}">
+    <update id="updateByPrimaryKeySelective" parameterType="${options.pons}.${model.modelName}">
         update ${model.name}
         <set>
         <#list model.fields as field>
@@ -59,7 +59,7 @@
         </set>
         where id = ${r"#{"}${model.primaryKey.name},jdbcType=${model.primaryKey.typeName}${r"}"}
     </update>
-    <update id="updateByPrimaryKey" parameterType="${options.pons}.${model.upperCaseName}">
+    <update id="updateByPrimaryKey" parameterType="${options.pons}.${model.modelName}">
         update ${model.name}
         set
     <#list model.fields as field>
