@@ -1,0 +1,72 @@
+{
+  "datasource": {
+	"dbUrl": "jdbc:mysql://localhost:3306/device_manage?useSSL=false",
+	"driverClassName": "com.mysql.jdbc.Driver",
+	"username": "root",
+	"password": "root",
+	"tables": 
+	{
+      "t_user": "User"
+	}
+  },
+  "templates": [
+    {
+      "name": "beanClass",
+      "templateFilename": "beanClass.ftl",
+      "outputPath": "output/bean",
+      "outputFilenameRule": "{upperCaseName}.java",
+      "options": {
+        "pons": "org.bigmonkey.robot.entity.po"
+      }
+    },
+    {
+      "name": "mapperClass",
+      "templateFilename": "mapperClass.ftl",
+      "outputPath": "output/mapper",
+      "outputFilenameRule": "{upperCaseName}Mapper.java",
+      "options": {
+        "pons": "org.bigmonkey.robot.entity.po",
+        "mpns": "org.bigmonkey.robot.mapper"
+      }
+    },
+    {
+      "name": "mapperXml",
+      "templateFilename": "mapperXml.ftl",
+      "outputPath": "output/mapperXml",
+      "outputFilenameRule": "{upperCaseName}Mapper.xml",
+      "options": {
+        "mapperns": "org.bigmonkey.robot.mapper",
+        "pons": "org.bigmonkey.robot.entity.po"
+      }
+    },
+    {
+      "name": "serviceInterface",
+      "templateFilename": "serviceInterface.ftl",
+      "outputPath": "output/service",
+      "outputFilenameRule": "I{upperCaseSimpleName}Service.java",
+      "options": {
+        "pons": "org.bigmonkey.robot.entity.po",
+        "itns": "org.bigmonkey.robot.service"
+      }
+    },
+    {
+      "name": "serviceImpl",
+      "templateFilename": "serviceImpl.ftl",
+      "outputPath": "output/serviceImpl",
+      "outputFilenameRule": "{upperCaseSimpleName}ServiceImpl.java",
+      "options": {
+        "pons": "org.bigmonkey.robot.entity.po",
+        "itns": "org.bigmonkey.robot.service",
+        "mpns": "org.bigmonkey.robot.mapper",
+        "imns": "org.bigmonkey.robot.service.impl"
+      }
+    },
+    {
+      "name": "deviceController",
+      "templateFilename": "deviceController.ftl",
+      "outputPath": "output/devCtrl",
+      "outputFilenameRule": "{upperCaseSimpleName}Controller.java",
+      "options": {}
+    }
+  ]
+}

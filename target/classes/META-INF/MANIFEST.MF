@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: Administrator
+Class-Path: lib/jackson-core-2.8.8.jar lib/jackson-databind-2.8.8.jar 
+ lib/jackson-annotations-2.8.0.jar lib/mysql-connector-java-5.1.41.jar
+  lib/freemarker-2.3.23.jar lib/commons-lang3-3.5.jar
+Build-Jdk: 1.8.0_201
+Created-By: Maven Integration for Eclipse
+Main-Class: org.bigmamonkey.App
+
