@@ -1,0 +1,65 @@
+{
+  "datasource": {
+	"dbUrl": "jdbc:mysql://192.168.1.128:3306/erp?characterEncoding=utf-8&useSSL=true&serverTimezone=UTC",
+	"driverClassName": "com.mysql.jdbc.Driver",
+	"username": "root",
+	"password": "123456",
+	"tables": 
+	{
+      "t_user": "User"
+	}
+  },
+  "templates": [
+    {
+      "name": "beanClass",
+      "templateFilename": "beanClass.ftl",
+      "outputPath": "output/bean",
+      "outputFilenameRule": ".java",
+      "options": {
+        "pons": "com.agent.erp.model"
+      }
+    },
+    {
+      "name": "mapperClass",
+      "templateFilename": "mapperClass.ftl",
+      "outputPath": "output/mapper",
+      "outputFilenameRule": "Mapper.java",
+      "options": {
+        "pons": "com.agent.erp.model",
+        "mpns": "com.agent.erp.dao"
+      }
+    },
+    {
+      "name": "mapperXml",
+      "templateFilename": "mapperXml.ftl",
+      "outputPath": "output/mapperXml",
+      "outputFilenameRule": "Mapper.xml",
+      "options": {
+        "mapperns": "com.agent.erp.dao",
+        "pons": "com.agent.erp.model"
+      }
+    },
+    {
+      "name": "serviceInterface",
+      "templateFilename": "serviceInterface.ftl",
+      "outputPath": "output/service",
+      "outputFilenameRule": "Service.java",
+      "options": {
+        "pons": "com.agent.erp.model",
+        "itns": "com.agent.erp.service"
+      }
+    },
+    {
+      "name": "serviceImpl",
+      "templateFilename": "serviceImpl.ftl",
+      "outputPath": "output/serviceImpl",
+      "outputFilenameRule": "ServiceImpl.java",
+      "options": {
+        "pons": "com.agent.erp.model",
+        "itns": "com.agent.erp.service",
+        "mpns": "com.agent.erp.dao",
+        "imns": "com.agent.erp.service.impl"
+      }
+    }
+  ]
+}

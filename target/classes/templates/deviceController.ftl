@@ -1,11 +1,3 @@
-/*
-* Copyright (c) 2017. bigmamonkey zhangshuocool@163.com
-* Unless required by applicable law or agreed to in writing, software distributed under
-* the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-* ANY KIND, either express or implied. See the License for the specific language governing
-* permissions and limitations under the License.
-*/
-
 package org.bigmonkey.robot.controller.manage;
 
 import org.bigmonkey.robot.controller.BaseController;
@@ -32,13 +24,13 @@ import java.util.List;
 */
 @RequestMapping("/manage/${model.simpleName}")
 @Controller
-public class ${model.upperCaseSimpleName}Controller extends BaseController {
+public class ${model.modelName}Controller extends BaseController {
 
     @Autowired
     private IBaseInfoService baseInfoService;
 
     @Autowired
-    private I${model.upperCaseSimpleName}Service ${model.simpleName}Service;
+    private I${model.modelName}Service ${model.simpleName}Service;
 
     @PostMapping("/list")
     @ResponseBody
