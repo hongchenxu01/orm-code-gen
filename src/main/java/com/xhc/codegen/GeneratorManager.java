@@ -2,6 +2,7 @@ package com.xhc.codegen;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.net.URL;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -38,8 +39,10 @@ public class GeneratorManager {
     }
 
     public void Start() throws Exception {
-
-        Config config = ConfigReader.getConfigByFilePath(Config.class, configPath);
+    	// 读取config.json资源文件
+    	URL cfgResource = GeneratorManager.class.getClassLoader().getResource(this.configPath);
+    	String templateDir = GeneratorManager.class.getResource("/").toString() + this.templatePath + "/";
+        Config config = ConfigReader.getConfigByFilePath(Config.class, cfgResource.getPath());
 
         List<TemplateConfig> templates = config.getTemplates();
         for (TemplateConfig template : templates) {
@@ -47,7 +50,7 @@ public class GeneratorManager {
             List<TableInfo> models = ds.buildDataModels(config.getDatasource());
 
             cfg = new Configuration(Configuration.VERSION_2_3_22);
-            cfg.setDirectoryForTemplateLoading(new File(templatePath));
+            cfg.setDirectoryForTemplateLoading(new File("D:\\Users\\asus\\git\\orm-code-gen\\target\\classes\\templates"));
             cfg.setDefaultEncoding("UTF-8");
             cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
