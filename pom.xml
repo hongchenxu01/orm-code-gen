@@ -50,15 +50,18 @@
   </dependencies>
   
   
-  
  <build>
     <resources>
       <!-- 控制资源文件的拷贝 -->
       <resource>
         <directory>src/main/resources</directory>
-        <targetPath>${project.build.directory}</targetPath>
+        <includes>
+        	<include>**/*.json</include>
+        	<include>**/*.ftl</include>
+        </includes>
       </resource>
     </resources>
+    
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -85,7 +88,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>org.bigmamonkey.App</mainClass>
+              <mainClass>com.xhc.codegen.App</mainClass>
             </manifest>
           </archive>
         </configuration>
