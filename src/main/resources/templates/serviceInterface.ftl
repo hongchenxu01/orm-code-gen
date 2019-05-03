@@ -3,7 +3,7 @@ package ${options.itns};
 import ${options.pons}.${model.modelName};
 import java.util.List;
 
-public interface I${model.modelName}Service {
+public interface ${model.modelName}Service {
 
     int deleteByPrimaryKey(${model.primaryKey.columnType.javaType} ${model.primaryKey.name});
 
