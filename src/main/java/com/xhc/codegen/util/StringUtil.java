@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 
 /**
  * @title: StringUtil.java
@@ -41,12 +43,42 @@ public class StringUtil {
     }
 
     public static String ToSimpleName(String str) {
-        String[] strs = str.split("_");
-        String simpleName = strs[0];
-        if (strs.length > 1)
-        {
-            simpleName = str.replaceFirst(strs[0] + "_", "");
-        }
-        return simpleName;
+    	if(StringUtils.isEmpty(str)) {
+    		return "";
+    	}
+    	
+    	StringBuilder stringBuilder = new StringBuilder();
+    	String firstChar = String.valueOf(str.charAt(0));
+    	stringBuilder.append(firstChar.toLowerCase());
+    	if(str.length()>1) {
+    		stringBuilder.append(str.substring(1));
+    	}
+        return stringBuilder.toString();
     }
+    
+    /***
+     * 下划线命名转为驼峰命名
+     * 
+     * @param para
+     *        下划线命名的字符串
+     */
+    public static String UnderlineToHump(String para){
+    	if (!para.contains("_")) {
+    		return para;
+        }
+		StringBuilder result=new StringBuilder();
+		String a[]=para.split("_");
+		for(String s:a){
+			if(result.length() == 0){
+				result.append(s.toLowerCase());
+			}else{
+				result.append(s.substring(0, 1).toUpperCase());
+				if(s.length() > 1) {
+					result.append(s.substring(1).toLowerCase());
+				}
+			}
+		}
+		return result.toString();
+	}
+    
 }
