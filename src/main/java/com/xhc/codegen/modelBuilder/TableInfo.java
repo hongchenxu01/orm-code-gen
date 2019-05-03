@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 public class TableInfo {
     private String name; // 原始表名
     private String modelName;
+    private String simpleName;
     private List<TableField> fields = new ArrayList<TableField>();
     private List<String> pkgs = new ArrayList<String>(); // 所有字段类型对应的Java包，import到java文件
     private TableField primaryKey; // 主键字段
@@ -33,8 +34,9 @@ public class TableInfo {
         for(TableField field : fields) {
         	String pkg = field.getColumnType().getPkg();
             if (StringUtils.isEmpty(pkg) || pkgs.contains(pkg)) {
-                return;
+                continue;
             }
+            
             pkgs.add(pkg);
         }
     }
@@ -77,4 +79,15 @@ public class TableInfo {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
+	public String getSimpleName() {
+		return simpleName;
+	}
+
+
+	public void setSimpleName(String simpleName) {
+		this.simpleName = simpleName;
+	}
+	
 }

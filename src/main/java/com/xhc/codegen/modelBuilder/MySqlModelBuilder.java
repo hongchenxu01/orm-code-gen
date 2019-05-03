@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import com.xhc.codegen.util.StringUtil;
+
 
 public class MySqlModelBuilder{
 
@@ -87,6 +89,7 @@ public class MySqlModelBuilder{
                 tableInfo.setPrimaryKey(primaryKey);
                 tableInfo.setRemarks(remarks);
                 tableInfo.setModelName(tableCfgMap.get(tableName));
+                tableInfo.setSimpleName(StringUtil.ToSimpleName(tableCfgMap.get(tableName)));
                 tableInfos.add(tableInfo);
             }
         } catch (SQLException e) {
@@ -106,13 +109,12 @@ public class MySqlModelBuilder{
         while (rs.next()) {
             String columnName = rs.getString("COLUMN_NAME");//列名
             int dataType = rs.getInt("DATA_TYPE"); //对应的    类型
-            String dataTypeName = rs.getString("TYPE_NAME");//java.sql.Types类型   名称
             int columnSize = rs.getInt("COLUMN_SIZE");//列大小
             String remarks = rs.getString("REMARKS");//列描述
             TableField tableField = new TableField();
             tableField.setName(columnName);
+            tableField.setHumpName(StringUtil.UnderlineToHump(columnName));
             tableField.setDataType(dataType);
-//            tableField.setTypeName(dataTypeName);
             tableField.setColumnSize(columnSize);
             tableField.setRemarks(remarks);
             tableFields.add(tableField);

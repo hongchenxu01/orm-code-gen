@@ -15,8 +15,10 @@ import com.xhc.codegen.util.StringUtil;
 public class TableField {
     private String name; // 原始字段名
     private String upperCaseName; // 首字母大写字段名
+    private String humpName; // 驼峰命名
     private int dataType; // 字段类型值，对应 java.sql.Types中的枚举值
     private DbColumnType columnType;
+    private String javaTypeAlias; // java类型别名
     private String typeName; // 字段数据库类型，其他类型参见源码：TableField.java
     private int columnSize; // 字段大小
     private String remarks; // 字段注释
@@ -44,7 +46,7 @@ public class TableField {
 
     public void setDataType(int dataType) {
         this.dataType = dataType;
-
+        
         switch (dataType) {
             case Types.INTEGER:
                 columnType = DbColumnType.INTEGER;
@@ -83,6 +85,8 @@ public class TableField {
                 typeName = "VARCHAR";
                 break;
         }
+        
+        this.javaTypeAlias = columnType.getJavaType().toLowerCase();
     }
 
     public String getTypeName() {
@@ -116,4 +120,21 @@ public class TableField {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
+
+	public String getHumpName() {
+		return humpName;
+	}
+
+	public void setHumpName(String humpName) {
+		this.humpName = humpName;
+	}
+
+	public String getJavaTypeAlias() {
+		return javaTypeAlias;
+	}
+
+	public void setJavaTypeAlias(String javaTypeAlias) {
+		this.javaTypeAlias = javaTypeAlias;
+	}
+	
 }
