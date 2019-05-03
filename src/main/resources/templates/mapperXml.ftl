@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="${options.pons}.${model.modelName}">
         <id column="${model.primaryKey.name}" property="${model.primaryKey.name}" jdbcType="${model.primaryKey.typeName}"/>
     <#list model.fields as field>
-        <result column="${field.name}" property="${field.name}" jdbcType="${field.typeName}"/>
+        <result column="${field.name}" property="${field.humpName}" jdbcType="${field.typeName}"/>
     </#list>
     </resultMap>
     <sql id="Base_Column_List">
@@ -25,7 +25,10 @@
         delete from ${model.name}
         where id = ${r"#{"}${model.primaryKey.name},jdbcType=${model.primaryKey.typeName}${r"}"}
     </delete>
-    <insert id="insert" useGeneratedKeys="true" keyProperty="${model.primaryKey.name}" parameterType="${options.pons}.${model.modelName}">
+    <insert id="insert" parameterType="${options.pons}.${model.modelName}">
+		<selectKey resultType="${model.primaryKey.javaTypeAlias}" keyProperty="${model.primaryKey.name}" order="AFTER" >  
+    		SELECT LAST_INSERT_ID()  
+  		</selectKey>
         insert into ${model.name} (<#list model.fields as field>${field.name}<#sep>, </#list>)
         values (<#list model.fields as field>${r"#{"}${field.name},jdbcType=${field.typeName}${r"}"}<#sep>, </#list>)
     </insert>

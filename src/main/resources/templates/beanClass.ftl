@@ -12,7 +12,7 @@ import lombok.Data;
 public class ${model.modelName} {
 
     <#list model.fields as field>
-    private ${field.columnType.javaType} ${field.name}; // ${field.remarks}
+    private ${field.columnType.javaType} ${field.humpName}; // ${field.remarks}
     </#list>
 
 }
